@@ -1,0 +1,6 @@
+framework module Pods_GameStarDB_GameStarDBUITests {
+  umbrella header "Pods-GameStarDB-GameStarDBUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
