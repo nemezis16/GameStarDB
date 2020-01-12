@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - GameListItem
 struct GameListItem: Codable {
+    
     let id: Int
     let cover: Cover?
     var genres: [Genre]?

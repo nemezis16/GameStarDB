@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3F9D0046B67186372AD7CD24 /* Pods_GameStarDBTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF8E989B392C0BF090971D2 /* Pods_GameStarDBTests.framework */; };
 		8FCA5A17820A32023ED75DBD /* Pods_GameStarDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07C1695201872AF5CDC5225 /* Pods_GameStarDB.framework */; };
+		A321CFC623CA7BEA0013E851 /* ReactiveExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A321CFC523CA7BEA0013E851 /* ReactiveExtensions.swift */; };
+		A321CFC923CB6F2D0013E851 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A321CFC823CB6F2D0013E851 /* UIAlertControllerExtension.swift */; };
+		A321CFCB23CB7CD10013E851 /* GameSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A321CFCA23CB7CD10013E851 /* GameSearchTableViewCell.swift */; };
+		A321CFCD23CB88E00013E851 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A321CFCC23CB88E00013E851 /* UIImageViewExtension.swift */; };
 		A3A381BB23C2398E00C02ABD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A381BA23C2398E00C02ABD /* AppDelegate.swift */; };
 		A3A381BD23C2398E00C02ABD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A381BC23C2398E00C02ABD /* SceneDelegate.swift */; };
 		A3A381C223C2398E00C02ABD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3A381C023C2398E00C02ABD /* Main.storyboard */; };
@@ -46,6 +50,10 @@
 		0E0359C9E3631B2CBD3C9F6F /* Pods-GameStarDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameStarDB.debug.xcconfig"; path = "Target Support Files/Pods-GameStarDB/Pods-GameStarDB.debug.xcconfig"; sourceTree = "<group>"; };
 		4ACBFE9001AA17AEC645FDA3 /* Pods-GameStarDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameStarDB.release.xcconfig"; path = "Target Support Files/Pods-GameStarDB/Pods-GameStarDB.release.xcconfig"; sourceTree = "<group>"; };
 		8CE08F623813FD643A130D20 /* Pods-GameStarDB-GameStarDBUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GameStarDB-GameStarDBUITests.release.xcconfig"; path = "Target Support Files/Pods-GameStarDB-GameStarDBUITests/Pods-GameStarDB-GameStarDBUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A321CFC523CA7BEA0013E851 /* ReactiveExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveExtensions.swift; sourceTree = "<group>"; };
+		A321CFC823CB6F2D0013E851 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		A321CFCA23CB7CD10013E851 /* GameSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchTableViewCell.swift; sourceTree = "<group>"; };
+		A321CFCC23CB88E00013E851 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		A3A381B723C2398E00C02ABD /* GameStarDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameStarDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A381BA23C2398E00C02ABD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3A381BC23C2398E00C02ABD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +107,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A321CFC423CA7BD20013E851 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A321CFC523CA7BEA0013E851 /* ReactiveExtensions.swift */,
+				A321CFC823CB6F2D0013E851 /* UIAlertControllerExtension.swift */,
+				A321CFCC23CB88E00013E851 /* UIImageViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A3A381AE23C2398E00C02ABD = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +142,7 @@
 		A3A381B923C2398E00C02ABD /* GameStarDB */ = {
 			isa = PBXGroup;
 			children = (
+				A321CFC423CA7BD20013E851 /* Extensions */,
 				A3A381F323C38E5000C02ABD /* SupportingFiles */,
 				A3A381EE23C38DEC00C02ABD /* MVVM */,
 			);
@@ -163,6 +182,7 @@
 			children = (
 				A3A381C023C2398E00C02ABD /* Main.storyboard */,
 				A3A381EC23C3787F00C02ABD /* GameSearchViewController.swift */,
+				A321CFCA23CB7CD10013E851 /* GameSearchTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -464,7 +484,11 @@
 				A3A381BB23C2398E00C02ABD /* AppDelegate.swift in Sources */,
 				A3A381BD23C2398E00C02ABD /* SceneDelegate.swift in Sources */,
 				A3A381EB23C2432D00C02ABD /* IGDB.swift in Sources */,
+				A321CFC923CB6F2D0013E851 /* UIAlertControllerExtension.swift in Sources */,
+				A321CFCD23CB88E00013E851 /* UIImageViewExtension.swift in Sources */,
 				A3A381ED23C3787F00C02ABD /* GameSearchViewController.swift in Sources */,
+				A321CFCB23CB7CD10013E851 /* GameSearchTableViewCell.swift in Sources */,
+				A321CFC623CA7BEA0013E851 /* ReactiveExtensions.swift in Sources */,
 				A3A381FA23C4986D00C02ABD /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
