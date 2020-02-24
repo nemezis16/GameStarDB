@@ -19,7 +19,9 @@ extension UIImageView {
         DispatchQueue.global(qos: .userInitiated).async {
             if let data = cache.cachedResponse(for: request)?.data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    self.transition(toImage: image)
+                    self.image = image
+
+//                    self.transition(toImage: image)
                 }
             } else {
                 URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -27,7 +29,9 @@ extension UIImageView {
                         let cachedData = CachedURLResponse(response: response, data: data)
                         cache.storeCachedResponse(cachedData, for: request)
                         DispatchQueue.main.async {
-                            self.transition(toImage: image)
+                            self.image = image
+
+//                            self.transition(toImage: image)
                         }
                     }
                 }).resume()

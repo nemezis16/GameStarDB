@@ -89,7 +89,7 @@
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="qvQ-AP-b3r"/>
+                                                                <constraint firstAttribute="height" priority="750" constant="60" id="qvQ-AP-b3r"/>
                                                                 <constraint firstItem="5X0-kl-6xR" firstAttribute="width" secondItem="jge-hE-Oag" secondAttribute="width" multiplier="2" priority="750" id="rrn-RY-E8A"/>
                                                             </constraints>
                                                         </stackView>
@@ -101,7 +101,6 @@
                                                         <constraint firstItem="1GQ-zE-g98" firstAttribute="top" secondItem="34I-2r-wbR" secondAttribute="top" id="3tf-KN-f5K"/>
                                                         <constraint firstAttribute="trailing" secondItem="SQ2-o3-ea7" secondAttribute="trailing" id="KtM-oo-71T"/>
                                                         <constraint firstAttribute="bottom" secondItem="SQ2-o3-ea7" secondAttribute="bottom" id="Udn-IQ-rFU"/>
-                                                        <constraint firstAttribute="width" constant="240" id="cLd-dR-JbL"/>
                                                         <constraint firstItem="SQ2-o3-ea7" firstAttribute="leading" secondItem="34I-2r-wbR" secondAttribute="leading" id="cbH-44-aqX"/>
                                                         <constraint firstItem="1GQ-zE-g98" firstAttribute="leading" secondItem="34I-2r-wbR" secondAttribute="leading" id="eUh-Qx-YAh"/>
                                                         <constraint firstAttribute="height" priority="750" constant="176" id="ySr-7l-8Vx"/>
@@ -137,6 +136,7 @@
                     <navigationItem key="navigationItem" id="CVU-pC-eQ0"/>
                     <connections>
                         <outlet property="gameSearchTableView" destination="SDu-5R-7AT" id="rVp-FC-0TX"/>
+                        <outlet property="searchBar" destination="XtX-qb-Ou8" id="LbW-9N-IQt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
