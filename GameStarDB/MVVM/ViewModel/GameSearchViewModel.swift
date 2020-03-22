@@ -13,8 +13,8 @@ import RxCocoa
 class GameSearchViewModel {
     
     public enum SearchError {
-           case internetError(String)
-           case serverMessage(String)
+        case internetError(String)
+        case serverMessage(String)
     }
 
     public let gameList : PublishSubject <[GameListItem]> = PublishSubject()

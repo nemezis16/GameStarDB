@@ -10,7 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class GameSearchViewController: UIViewController {
+final class GameSearchViewController: UIViewController {
+
     @IBOutlet var gameSearchTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
 
@@ -20,46 +21,33 @@ class GameSearchViewController: UIViewController {
     var gameItems = PublishSubject<[GameListItem]>()
     var querySubject = PublishSubject<String>()
 
-//MARK: LifeCycle
-
+//MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-
-
-        searchBar.rx.cancelButtonClicked
-        .bind { self.searchBar.resignFirstResponder() }
-        .disposed(by: disposeBag)
-
-        gameSearchTableView.rx.didScroll
-        .bind { self.searchBar.resignFirstResponder() }
-        .disposed(by: disposeBag)
-
-
-        self.setupBingings()
-        self.gameSearchViewModel.requestData(data: "potter")
+        setupKeyboardBehavior()
+        setupBingings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
+        // Setup here due warning (?)
+        //"[TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window). This may cause bugs by forcing views inside the table view to load and perform layout without accurate information (e.g. table view bounds, trait collection, layout margins, safe area insets, etc), and will also cause unnecessary performance overhead due to extra layout passes."
         setupCells()
+        setupSelectingCell()
     }
+}
 
-//MARK: Private
-
+//MARK: - Private
+extension GameSearchViewController {
     private func setupBingings() {
-        
         // Loading
         gameSearchViewModel
         .loading
         .bind(to: rx.isAnimating)
         .disposed(by: disposeBag)
-        
+
         // Error
         gameSearchViewModel
         .error
@@ -75,74 +63,63 @@ class GameSearchViewController: UIViewController {
             self.present(UIAlertController.alertWith(message: messageError), animated: true)
         })
         .disposed(by: disposeBag)
-        
+
         // GameList
         gameSearchViewModel
         .gameList
         .observeOn(MainScheduler.instance)
         .bind(to: gameItems)
         .disposed(by: disposeBag)
-        
+
         searchBar
         .rx.text.orEmpty
-        .throttle(.milliseconds(300), scheduler: MainScheduler.instance)
+        .throttle(.milliseconds(1000), scheduler: MainScheduler.instance)
         .distinctUntilChanged()
         .flatMapLatest { query -> Driver<String> in
-            self.gameSearchViewModel.requestData(data: query)
+            self.gameSearchViewModel.requestData(data: query == "" ? "potter" : query)
             return Observable.just(query).asDriver(onErrorJustReturn: query)
         }
         .observeOn(MainScheduler.instance)
         .bind(to: querySubject)
         .disposed(by: disposeBag)
-
-//        let results = self.searchBar.rx.text.orEmpty
-//        .asDriver()
-//        .throttle(.milliseconds(300))
-//        .distinctUntilChanged()
-//        .flatMapLatest { query in
-//            Observable.just(query).asDriver(onErrorJustReturn: query)
-//        }
-//        _ = results.do(onNext: {
-//            print($0)
-//            print("")
-//        })
     }
 
     private func setupCells() {
+        // TODO: - Move it to ViewModel, viewModel set to cell as in Wikipedia RX
+
         // BindItems
         gameItems.bind(to: gameSearchTableView.rx.items(cellIdentifier: "GameSearchTableViewCell", cellType: GameSearchTableViewCell.self)) {
             (row, item, cell) in
             cell.gameImageView.loadImage(fromURL: item.cover?.url.replacingOccurrences(of: "//", with: "http://").replacingOccurrences(of: "t_thumb", with: "t_screenshot_big"))
             cell.gameTitleLabel.text = item.name
-            item.rating.flatMap { cell.gameRatingLabel.text = String(format: "%.2f", $0) }
-            cell.gameGenraLabel.text = item.genres?.compactMap {
-                $0.name
-            }.reduce("", { $0 + "\n" + $1 })
+            item.rating.flatMap { cell.gameRatingLabel.text = String(format: "Rating: %.2f", $0) }
+            cell.gameGenraLabel.text = item.genres?.compactMap { $0.name }.joined(separator: ", ")
         }.disposed(by: disposeBag)
-
-                // willDisplayCell
-        //        gameSearchTableView.rx.willDisplayCell
-        //            .subscribe(onNext: ({ (cell,indexPath) in
-        //                cell.alpha = 0
-        //                let transform = CATransform3DTranslate(CATransform3DIdentity, 0, -250, 0)
-        //                cell.layer.transform = transform
-        //                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-        //                    cell.alpha = 1
-        //                    cell.layer.transform = CATransform3DIdentity
-        //                }, completion: nil)
-        //            })).disposed(by: disposeBag)
     }
 
-    @objc
-    func adjustForKeyboard(notification: Notification) {
-        switch notification.name {
-        case UIResponder.keyboardWillShowNotification:
-            searchBar.setShowsCancelButton(true, animated: true)
+    private func setupSelectingCell() {
+        gameSearchTableView.rx.modelSelected(GameListItem.self)
+        .asDriver()
+        .drive(onNext: { print($0.name) })
+        .disposed(by: disposeBag)
+    }
 
-        case UIResponder.keyboardWillHideNotification:
-            searchBar.setShowsCancelButton(false, animated: true)
+    private func setupKeyboardBehavior() {
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+        .bind { _ in self.searchBar.setShowsCancelButton(true, animated: true) }
+        .disposed(by: disposeBag)
 
-        default: break
-        }
+        NotificationCenter.default.rx.notification(UIResponder.keyboardDidHideNotification)
+        .bind { _ in self.searchBar.setShowsCancelButton(false, animated: true) }
+        .disposed(by: disposeBag)
+
+        searchBar.rx.cancelButtonClicked
+        .bind { self.searchBar.resignFirstResponder() }
+        .disposed(by: disposeBag)
+
+        gameSearchTableView.rx.didScroll
+        .bind { self.searchBar.resignFirstResponder() }
+        .disposed(by: disposeBag)
     }
 }
+

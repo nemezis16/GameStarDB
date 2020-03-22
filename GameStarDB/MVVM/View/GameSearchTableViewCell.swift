@@ -9,7 +9,7 @@
 import UIKit
 
 class GameSearchTableViewCell: UITableViewCell {
-
+    
     @IBOutlet var gameImageView: UIImageView!
     @IBOutlet var gameTitleLabel: UILabel!
     @IBOutlet var gameGenraLabel: UILabel!

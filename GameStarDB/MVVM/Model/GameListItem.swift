@@ -20,6 +20,7 @@ struct GameListItem: Codable {
 
 // MARK: - Cover
 struct Cover: Codable {
+
     let id: Int
     let alphaChannel, animated: Bool?
     let game, height: Int
@@ -37,6 +38,7 @@ struct Cover: Codable {
 
 // MARK: - Genre
 struct Genre: Codable {
+
     let id: Int
     let name: String
 }
@@ -44,6 +46,7 @@ struct Genre: Codable {
 // MARK: Convenience initializers
 
 extension GameListItem {
+
     init?(data: Data) {
         do {
             let me = try JSONDecoder().decode(GameListItem.self, from: data)
