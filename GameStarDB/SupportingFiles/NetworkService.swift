@@ -6,7 +6,7 @@
 //  Copyright © 2020 Roman Osadchuk. All rights reserved.
 //
 
-import Foundation
+import Foundation   
 import SwiftyJSON
 import Moya
 
