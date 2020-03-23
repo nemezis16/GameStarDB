@@ -1,12 +1,11 @@
 PODS:
-  - Alamofire (4.9.1)
-  - Moya (13.0.1):
-    - Moya/Core (= 13.0.1)
-  - Moya/Core (13.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.1)
+  - Alamofire (5.0.4)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - Moya/RxSwift (14.0.0):
+    - Moya/Core
+    - RxSwift (~> 5.0)
   - Nuke (7.6.3)
-  - Result (4.1.0)
   - ReSwift (5.0.0)
   - ReSwiftThunk (1.2.0):
     - ReSwift (~> 5.0)
@@ -25,7 +24,7 @@ PODS:
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
-  - Moya (~> 13.0)
+  - Moya/RxSwift (~> 14.0)
   - Nuke (~> 7.4)
   - ReSwift
   - ReSwiftThunk
@@ -39,7 +38,6 @@ SPEC REPOS:
     - Alamofire
     - Moya
     - Nuke
-    - Result
     - ReSwift
     - ReSwiftThunk
     - RxCocoa
@@ -49,10 +47,9 @@ SPEC REPOS:
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
   ReSwiftThunk: 23c8ea9092d9dc94b72005f19352dbd37fa42533
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
@@ -61,6 +58,6 @@ SPEC CHECKSUMS:
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 4c79f2c6a455796a7dc7bdd19e42ef9910b7d0eb
+PODFILE CHECKSUM: 57b5a622ae75c572d105ee360431c8298587cced
 
-COCOAPODS: 1.8.0.beta.2
+COCOAPODS: 1.8.4

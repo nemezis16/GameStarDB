@@ -22,10 +22,13 @@ struct GameListItem: Codable {
 struct Cover: Codable {
 
     let id: Int
-    let alphaChannel, animated: Bool?
-    let game, height: Int
-    let imageID, url: String
     let width: Int
+    let game: Int
+    let height: Int
+    let imageID: String
+    let url: String
+    let animated: Bool?
+    let alphaChannel: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id

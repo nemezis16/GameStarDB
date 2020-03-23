@@ -9,6 +9,7 @@
 import Foundation   
 import SwiftyJSON
 import Moya
+import RxSwift
 
 enum ApiResult {
     case success(JSON)
@@ -16,7 +17,7 @@ enum ApiResult {
 }
 
 enum RequestError: Error {
-      case unknownError
+      case unknownError(String? = nil)
       case connectionError
       case authorizationError(JSON)
       case invalidRequest
@@ -26,38 +27,58 @@ enum RequestError: Error {
       case serverUnavailable
 }
 
-class NetworkService {
-    
+
+class NetworkService: ReactiveCompatible {
     static let shared = NetworkService()
+    let provider = MoyaProvider<IGDB>()
+}
 
-    private let provider = MoyaProvider<IGDB>()
+extension Reactive where Base: NetworkService {
+    
+    func request(target: IGDB) -> Observable<ApiResult> {
+        let response: Observable<ApiResult> = Observable.create { [weak base] observer -> Disposable in
 
-    public func request(target: IGDB, completion: @escaping (ApiResult)->Void) {
-        provider.request(target) { result in
-            switch result {
-            case .success(let result): do {
-                let responseJson = try JSON(data: result.data)
-                    print("responseCode : \(result.statusCode)")
-                    print("responseJSON : \(responseJson)")
-                    switch result.statusCode {
-                    case 200:
-                    completion(ApiResult.success(responseJson))
-                    case 400...499:
-                    completion(ApiResult.failure(.authorizationError(responseJson)))
-                    case 500...599:
-                    completion(ApiResult.failure(.serverError))
-                    default:
-                        completion(ApiResult.failure(.unknownError))
-                        break
+            let observable = base?.provider.rx.requestWithProgress(target).subscribe { event in
+                switch event {
+                case .next(let progressResponse):
+                    if let response = progressResponse.response {
+                        do {
+                        let responseJson = try JSON(data: response.data)
+                            print("responseCode : \(response.statusCode)")
+                            print("responseJSON : \(responseJson)")
+
+                            switch response.statusCode {
+                            case 200:
+                                observer.onNext(.success(responseJson))
+
+                            case 400...499:
+                                observer.onNext(.failure(.authorizationError(responseJson)))
+
+                            case 500...599:
+                                observer.onNext(.failure(.serverError))
+
+                            default:
+                                observer.onNext(.failure(.unknownError(responseJson.description)))
+                                break
+                            }
+                            observer.onCompleted()
+                        } catch let parseJSONError {
+                            observer.onError(parseJSONError)
+                            print("error on parsing request to JSON : \(parseJSONError)")
+                        }
+                    } else {
+                        print("Progress: \(progressResponse.progress)")
                     }
-                } catch let parseJSONError {
-                    completion(ApiResult.failure(.unknownError))
-                    print("error on parsing request to JSON : \(parseJSONError)")
+
+                case .error(let error):
+                    observer.onError(error)
+
+                case .completed: break
                 }
-            case .failure(let error):
-                completion(ApiResult.failure(.connectionError))
-                print("\(error.localizedDescription)")
             }
+
+            return Disposables.create { observable?.dispose() }
         }
+        return response
     }
 }

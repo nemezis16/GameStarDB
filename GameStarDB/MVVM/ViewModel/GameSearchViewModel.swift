@@ -25,9 +25,8 @@ class GameSearchViewModel {
     
     public func requestData(data: String) {
         self.loading.onNext(true)
-        
-        NetworkService.shared.request(target: .search(name: data)) { result in
-            self.loading.onNext(false)
+
+        NetworkService.shared.rx.request(target: .search(name: data)).subscribe(onNext: { result in
             switch result {
             case .success(let returnJson) :
                 let gameList = returnJson.arrayValue.compactMap { return GameListItem(data: try! $0.rawData())}
@@ -42,6 +41,8 @@ class GameSearchViewModel {
                     self.error.onNext(.serverMessage("Unknown Error"))
                 }
             }
-        }
+        }, onError: { error in
+            self.error.onNext(.serverMessage(error.localizedDescription))
+        }).disposed(by: disposableBug)
     }
 }

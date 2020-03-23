@@ -16,7 +16,7 @@ target 'GameStarDB' do
   
   # Networking pods
   pod 'Nuke', '~> 7.4'
-  pod 'Moya', '~> 13.0'
+  pod 'Moya/RxSwift', '~> 14.0'
   pod 'SwiftyJSON'
 
   target 'GameStarDBTests' do
