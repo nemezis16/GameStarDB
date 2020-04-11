@@ -6,9 +6,10 @@
 //  Copyright © 2020 Roman Osadchuk. All rights reserved.
 //
 
+import typealias Reusable.NibReusable
 import UIKit
 
-class GameSearchTableViewCell: UITableViewCell {
+class GameSearchTableViewCell: UITableViewCell, NibReusable {
     
     @IBOutlet var gameImageView: UIImageView!
     @IBOutlet var gameTitleLabel: UILabel!

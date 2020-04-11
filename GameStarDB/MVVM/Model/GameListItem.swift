@@ -10,12 +10,16 @@ import Foundation
 
 // MARK: - GameListItem
 struct GameListItem: Codable {
-    
     let id: Int
     let cover: Cover?
     var genres: [Genre]?
     let name: String
     let rating: Double?
+}
+
+// MARK: - Equatable
+extension GameListItem: Equatable {
+    static func == (lhs: GameListItem, rhs: GameListItem) -> Bool { lhs.id == rhs.id }
 }
 
 // MARK: - Cover
@@ -25,7 +29,7 @@ struct Cover: Codable {
     let width: Int
     let game: Int
     let height: Int
-    let imageID: String
+    let imageID: String?
     let url: String
     let animated: Bool?
     let alphaChannel: Bool?

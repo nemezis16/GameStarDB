@@ -1,63 +1,81 @@
 PODS:
   - Alamofire (5.0.4)
+  - Differentiator (4.0.1)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
   - Nuke (7.6.3)
-  - ReSwift (5.0.0)
-  - ReSwiftThunk (1.2.0):
-    - ReSwift (~> 5.0)
-    - ReSwiftThunk/Core (= 1.2.0)
-  - ReSwiftThunk/Core (1.2.0):
-    - ReSwift (~> 5.0)
+  - ReactorKit (2.0.1):
+    - RxSwift (~> 5.0)
+  - Reusable (4.1.1):
+    - Reusable/Storyboard (= 4.1.1)
+    - Reusable/View (= 4.1.1)
+  - Reusable/Storyboard (4.1.1)
+  - Reusable/View (4.1.1)
   - RxCocoa (5.0.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
   - RxKeyboard (1.0.0):
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
-  - SwiftyJSON (5.0.0)
+  - RxSwiftExt (5.2.0):
+    - RxSwiftExt/Core (= 5.2.0)
+    - RxSwiftExt/RxCocoa (= 5.2.0)
+  - RxSwiftExt/Core (5.2.0):
+    - RxSwift (~> 5.0)
+  - RxSwiftExt/RxCocoa (5.2.0):
+    - RxCocoa (~> 5.0)
+    - RxSwiftExt/Core
 
 DEPENDENCIES:
   - Moya/RxSwift (~> 14.0)
   - Nuke (~> 7.4)
-  - ReSwift
-  - ReSwiftThunk
+  - ReactorKit
+  - Reusable
   - RxCocoa
+  - RxDataSources
   - RxKeyboard
   - RxSwift
-  - SwiftyJSON
+  - RxSwiftExt
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Differentiator
     - Moya
     - Nuke
-    - ReSwift
-    - ReSwiftThunk
+    - ReactorKit
+    - Reusable
     - RxCocoa
+    - RxDataSources
     - RxKeyboard
     - RxRelay
     - RxSwift
-    - SwiftyJSON
+    - RxSwiftExt
 
 SPEC CHECKSUMS:
   Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
-  ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
-  ReSwiftThunk: 23c8ea9092d9dc94b72005f19352dbd37fa42533
+  ReactorKit: a63c5e11e0fd32d59d672e54178b0ed2876b764b
+  Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
 
-PODFILE CHECKSUM: 57b5a622ae75c572d105ee360431c8298587cced
+PODFILE CHECKSUM: 908294d7f0347e515f539dc43c0cef418320b7a7
 
 COCOAPODS: 1.8.4
