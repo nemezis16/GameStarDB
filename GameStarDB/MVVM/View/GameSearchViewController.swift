@@ -25,6 +25,8 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         return activityIndicatorView
     }()
     private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchViewModel2.SectionType>(configureCell: {  _, tableView, indexPath, item in
+
+        // TODO: - Put this logic into some layer
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameSearchTableViewCell.self)
         cell.gameImageView.loadImage(fromURL: item.cover?.url.replacingOccurrences(of: "//", with: "http://").replacingOccurrences(of: "t_thumb", with: "t_screenshot_big"))
         cell.gameTitleLabel.text = item.name
@@ -38,7 +40,7 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        gameSearchTableView.register(cellType: GameSearchTableViewCell.self)
+//        gameSearchTableView.register(cellType: GameSearchTableViewCell.self)
         gameSearchTableView.tableFooterView = footerActivityIndicator
 
         definesPresentationContext = true
@@ -48,6 +50,12 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
     }
 
     func bind(reactor: GameSearchViewModel2) {
-
+        let state = reactor.state.asDriver(onErrorJustReturn: reactor.initialState)
+        //Read about Observer (Subscriber)
+        state.map { $0.dataSource }.distinctUntilChanged().drive(gameSearchTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        state.map { $0.isLoading }.drive(footerActivityIndicator.rx.isAnimating).disposed(by: disposeBag)
+        searchController.searchBar.rx.text.orEmpty.map(Action.search).bind(to: reactor.action).disposed(by: disposeBag)
+        gameSearchTableView.rx.reachedBottom(offset: 100.0).mapTo(Action.reachedBottom).bind(to: reactor.action).disposed(by: disposeBag)
+        gameSearchTableView.rx.modelSelected(GameListItem.self).map(Action.selecteItem).bind(to: reactor.action).disposed(by: disposeBag)
     }
 }
