@@ -7,7 +7,7 @@
 //
 
 struct Page {
-    let limit: Int = 20
+    let limit: Int = 40
     var offset: Int = 0
 }
 

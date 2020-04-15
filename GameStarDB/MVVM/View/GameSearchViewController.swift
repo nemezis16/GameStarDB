@@ -13,10 +13,11 @@ import Reusable
 import RxDataSources
 
 final class GameSearchViewController: UIViewController, StoryboardView, StoryboardBased {
-    private typealias Action = GameSearchViewModel2.Action
+    private typealias Action = GameSearchViewModel.Action
     var disposeBag = DisposeBag()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.obscuresBackgroundDuringPresentation = false
         return searchController
     }()
     private lazy var footerActivityIndicator: UIActivityIndicatorView = {
@@ -24,7 +25,7 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         activityIndicatorView.frame = CGRect(x: 0, y: 0, width: 0, height: 30)
         return activityIndicatorView
     }()
-    private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchViewModel2.SectionType>(configureCell: {  _, tableView, indexPath, item in
+    private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchViewModel.SectionType>(configureCell: {  _, tableView, indexPath, item in
 
         // TODO: - Put this logic into some layer
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameSearchTableViewCell.self)
@@ -40,16 +41,17 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        gameSearchTableView.register(cellType: GameSearchTableViewCell.self)
         gameSearchTableView.tableFooterView = footerActivityIndicator
 
         definesPresentationContext = true
 
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+
+        setupKeyboardBehavior()
     }
 
-    func bind(reactor: GameSearchViewModel2) {
+    func bind(reactor: GameSearchViewModel) {
         let state = reactor.state.asDriver(onErrorJustReturn: reactor.initialState)
         //Read about Observer (Subscriber)
         state.map { $0.dataSource }.distinctUntilChanged().drive(gameSearchTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
@@ -57,5 +59,24 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         searchController.searchBar.rx.text.orEmpty.map(Action.search).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.reachedBottom(offset: 100.0).mapTo(Action.reachedBottom).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.modelSelected(GameListItem.self).map(Action.selecteItem).bind(to: reactor.action).disposed(by: disposeBag)
+    }
+
+    private func setupKeyboardBehavior() {
+        let searchBar = navigationItem.searchController?.searchBar
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+            .bind { _ in searchBar?.setShowsCancelButton(true, animated: true) }
+            .disposed(by: disposeBag)
+
+        NotificationCenter.default.rx.notification(UIResponder.keyboardDidHideNotification)
+            .bind { _ in searchBar?.setShowsCancelButton(false, animated: true) }
+            .disposed(by: disposeBag)
+
+        searchBar?.rx.cancelButtonClicked
+            .bind { searchBar?.resignFirstResponder() }
+            .disposed(by: disposeBag)
+
+        gameSearchTableView.rx.didScroll
+            .bind { searchBar?.resignFirstResponder() }
+            .disposed(by: disposeBag)
     }
 }

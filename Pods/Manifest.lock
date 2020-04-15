@@ -6,7 +6,8 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
-  - Nuke (7.6.3)
+  - Nimble (8.0.5)
+  - Quick (2.2.0)
   - ReactorKit (2.0.1):
     - RxSwift (~> 5.0)
   - Reusable (4.1.1):
@@ -21,9 +22,6 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxKeyboard (1.0.0):
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
   - RxRelay (5.0.1):
     - RxSwift (~> 5)
   - RxSwift (5.0.1)
@@ -35,47 +33,52 @@ PODS:
   - RxSwiftExt/RxCocoa (5.2.0):
     - RxCocoa (~> 5.0)
     - RxSwiftExt/Core
+  - RxTest (5.1.1):
+    - RxSwift (~> 5)
 
 DEPENDENCIES:
   - Moya/RxSwift (~> 14.0)
-  - Nuke (~> 7.4)
+  - Nimble
+  - Quick
   - ReactorKit
   - Reusable
   - RxCocoa
   - RxDataSources
-  - RxKeyboard
   - RxSwift
   - RxSwiftExt
+  - RxTest
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Differentiator
     - Moya
-    - Nuke
+    - Nimble
+    - Quick
     - ReactorKit
     - Reusable
     - RxCocoa
     - RxDataSources
-    - RxKeyboard
     - RxRelay
     - RxSwift
     - RxSwiftExt
+    - RxTest
 
 SPEC CHECKSUMS:
   Alamofire: 0fe5fd24b4298dc377a6550da7d5f1b30e286fcb
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
-  Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
+  Nimble: 4ab1aeb9b45553c75b9687196b0fa0713170a332
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
   ReactorKit: a63c5e11e0fd32d59d672e54178b0ed2876b764b
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
+  RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
 
-PODFILE CHECKSUM: 908294d7f0347e515f539dc43c0cef418320b7a7
+PODFILE CHECKSUM: cb6304742376aef46a8c095ab8cec84f2f97b027
 
 COCOAPODS: 1.8.4

@@ -11,48 +11,7 @@ import RxSwiftExt
 import ReactorKit
 import struct Differentiator.SectionModel
 
-class GameSearchViewModel {
-    
-    public enum SearchError {
-        case internetError(String)
-        case serverMessage(String)
-    }
-
-    public let gameList : PublishSubject <[GameListItem]> = PublishSubject()
-    public let loading : PublishSubject <Bool> = PublishSubject()
-    public let error : PublishSubject<SearchError> = PublishSubject()
-
-    private let disposableBug = DisposeBag()
-    
-    public func requestData(data: String) {
-
-
-
-//        self.loading.onNext(true)
-
-//        NetworkService.shared.rx.request(target: .search(query: "Potter" )).subscribe(onNext: { result in
-//            switch result {
-//            case .success(let returnJson) :
-//                let gameList = returnJson.arrayValue.compactMap { return GameListItem(data: try! $0.rawData())}
-//                self.gameList.onNext(gameList)
-//            case .failure(let failure) :
-//                switch failure {
-//                case .connectionError:
-//                    self.error.onNext(.internetError("Check your Internet connection."))
-//                case .authorizationError(let errorJson):
-//                    self.error.onNext(.serverMessage(errorJson["message"].stringValue))
-//                default:
-//                    self.error.onNext(.serverMessage("Unknown Error"))
-//                }
-//            }
-//        }, onError: { error in
-//            self.error.onNext(.serverMessage(error.localizedDescription))
-//        }).disposed(by: disposableBug)
-    }
-}
-
-
-final class GameSearchViewModel2: Reactor {
+final class GameSearchViewModel: Reactor {
     typealias SectionType = SectionModel<String, GameListItem>
 
     enum Action: Equatable {
@@ -165,8 +124,8 @@ final class GameSearchViewModel2: Reactor {
 }
 
 // MARK: - State
-extension GameSearchViewModel2.State {
-    var dataSource: [GameSearchViewModel2.SectionType] {
-        return [GameSearchViewModel2.SectionType(model: "", items: items)]
+extension GameSearchViewModel.State {
+    var dataSource: [GameSearchViewModel.SectionType] {
+        return [GameSearchViewModel.SectionType(model: "", items: items)]
     }
 }
