@@ -1,5 +1,5 @@
 //
-//  GameSearchViewModel.swift
+//  GameSearchReactor.swift
 //  GameStarDB
 //
 //  Created by Roman Osadchuk on 06.01.2020.
@@ -11,7 +11,7 @@ import RxSwiftExt
 import ReactorKit
 import struct Differentiator.SectionModel
 
-final class GameSearchViewModel: Reactor {
+final class GameSearchReactor: Reactor {
     typealias SectionType = SectionModel<String, GameListItem>
 
     enum Action: Equatable {
@@ -124,8 +124,8 @@ final class GameSearchViewModel: Reactor {
 }
 
 // MARK: - State
-extension GameSearchViewModel.State {
-    var dataSource: [GameSearchViewModel.SectionType] {
-        return [GameSearchViewModel.SectionType(model: "", items: items)]
+extension GameSearchReactor.State {
+    var dataSource: [GameSearchReactor.SectionType] {
+        return [GameSearchReactor.SectionType(model: "", items: items)]
     }
 }

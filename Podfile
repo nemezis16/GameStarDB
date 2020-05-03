@@ -12,6 +12,7 @@ target 'GameStarDB' do
   pod 'RxSwiftExt'
   pod 'RxCocoa'
   pod 'RxDataSources'
+  pod 'RxFlow'
 
   # Redux pods
   pod 'ReactorKit'
