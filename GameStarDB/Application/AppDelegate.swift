@@ -20,18 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        self.coordinator.rx.willNavigate.subscribe(onNext: { flow, step in
-            print("will navigate to flow=\(flow) and step=\(step)")
-        }).disposed(by: disposeBag)
-
-
-
-        let searchViewController = GameSearchViewController.instantiate()
-        searchViewController.reactor = Dependencies.gameSearchReactor
-
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UINavigationController(rootViewController: searchViewController)
-        window?.makeKeyAndVisible()
+
+        coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
+            print("will navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+
+        coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
+            print("did navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+
+        let appFlow = AppFlow()
+
+        Flows.whenReady(flow1: appFlow) { [unowned self] root in
+            self.window?.rootViewController = root
+            self.window?.makeKeyAndVisible()
+        }
+
+        coordinator.coordinate(flow: appFlow, with: AppStepper())
 
         return true
     }
