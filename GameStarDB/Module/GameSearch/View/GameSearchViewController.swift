@@ -13,7 +13,7 @@ import Reusable
 import RxDataSources
 
 final class GameSearchViewController: UIViewController, StoryboardView, StoryboardBased {
-    private typealias Action = GameSearchViewModel.Action
+    private typealias Action = GameSearchReactor.Action
     var disposeBag = DisposeBag()
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -25,7 +25,7 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         activityIndicatorView.frame = CGRect(x: 0, y: 0, width: 0, height: 30)
         return activityIndicatorView
     }()
-    private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchViewModel.SectionType>(configureCell: {  _, tableView, indexPath, item in
+    private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchReactor.SectionType>(configureCell: {  _, tableView, indexPath, item in
 
         // TODO: - Put this logic into some layer
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameSearchTableViewCell.self)
@@ -51,7 +51,7 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         setupKeyboardBehavior()
     }
 
-    func bind(reactor: GameSearchViewModel) {
+    func bind(reactor: GameSearchReactor) {
         let state = reactor.state.asDriver(onErrorJustReturn: reactor.initialState)
         //Read about Observer (Subscriber)
         state.map { $0.dataSource }.distinctUntilChanged().drive(gameSearchTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
@@ -59,6 +59,8 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         searchController.searchBar.rx.text.orEmpty.map(Action.search).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.reachedBottom(offset: 100.0).mapTo(Action.reachedBottom).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.modelSelected(GameListItem.self).map(Action.selecteItem).bind(to: reactor.action).disposed(by: disposeBag)
+
+        reactor.action.asObserver().onNext(.search("Harry Potter"))
     }
 
     private func setupKeyboardBehavior() {
