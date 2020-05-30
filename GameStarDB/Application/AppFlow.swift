@@ -36,11 +36,7 @@ class AppFlow: Flow {
 extension AppFlow {
     private func navigationToGameListScreen() -> FlowContributors {
         let gameSearchFlow = GameSearchFlow(rootViewController: rootViewContoller)
-        return .multiple(flowContributors: [.contribute(withNextPresentable: gameSearchFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: AppStep.gameListIsRequired))])
-    }
-
-    private func naviagteToMovieDetailScreen(movieId: Int) -> FlowContributors {
-        return .none
+        return .one(flowContributor: .contribute(withNextPresentable: gameSearchFlow,
+                                                 withNextStepper: OneStepper(withSingleStep: AppStep.gameListIsRequired)))
     }
 }

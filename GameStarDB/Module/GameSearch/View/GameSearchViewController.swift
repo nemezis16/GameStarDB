@@ -59,6 +59,8 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
         searchController.searchBar.rx.text.orEmpty.map(Action.search).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.reachedBottom(offset: 100.0).mapTo(Action.reachedBottom).bind(to: reactor.action).disposed(by: disposeBag)
         gameSearchTableView.rx.modelSelected(GameListItem.self).map(Action.selecteItem).bind(to: reactor.action).disposed(by: disposeBag)
+
+        reactor.action.asObserver().onNext(.search("Harry Potter"))
     }
 
     private func setupKeyboardBehavior() {

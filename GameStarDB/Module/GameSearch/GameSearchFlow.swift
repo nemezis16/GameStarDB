@@ -22,8 +22,10 @@ class GameSearchFlow: Flow {
         switch appStep {
         case .gameListIsRequired:
             return navigateToGameSearchScreen()
+
         case .movieIsPicked(id: let id):
-            return .none
+            return navigateToGameDetailScreen()
+
         default:
             return .none
         }
@@ -34,9 +36,20 @@ class GameSearchFlow: Flow {
 extension GameSearchFlow {
     private func navigateToGameSearchScreen() -> FlowContributors {
         let searchViewController = GameSearchViewController.instantiate()
-        searchViewController.reactor = Dependencies.gameSearchReactor
+        let reactor = Dependencies.gameSearchReactor
+        searchViewController.reactor = reactor
 
-        rootViewController.pushViewController(searchViewController, animated: false)
+        rootViewController.pushViewController(searchViewController, animated: true)
+
+        return .one(flowContributor: .contribute(withNextPresentable: searchViewController,
+                                                 withNextStepper: reactor,
+                                                 allowStepWhenNotPresented: true))
+    }
+
+    private func navigateToGameDetailScreen() -> FlowContributors {
+        let gameDetailViewController = GameDetailViewController.instantiate()
+
+        rootViewController.pushViewController(gameDetailViewController, animated: true)
 
         return .none
     }
