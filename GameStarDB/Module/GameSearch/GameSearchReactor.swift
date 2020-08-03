@@ -35,6 +35,7 @@ final class GameSearchReactor: Reactor, Stepper {
         var page = Page.first
         var isLoading = false
         var items = [GameListItem]()
+        var dataSource: [SectionType] { [SectionType(model: "", items: items)] }
     }
 
     var initialState = State()
@@ -126,13 +127,6 @@ final class GameSearchReactor: Reactor, Stepper {
             }
             .distinctUntilChanged()
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
-        return Observable.merge(searchActions.nonMatches, filteredSearchActions).debug("PENIS")
-    }
-}
-
-// MARK: - State
-extension GameSearchReactor.State {
-    var dataSource: [GameSearchReactor.SectionType] {
-        return [GameSearchReactor.SectionType(model: "", items: items)]
+        return Observable.merge(searchActions.nonMatches, filteredSearchActions).debug("DEBUG")
     }
 }

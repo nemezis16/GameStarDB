@@ -9,7 +9,6 @@
 import class Foundation.JSONDecoder
 import class RxSwift.SerialDispatchQueueScheduler
 
-/// There is no place for production-like DI in this example, sorry
 enum Dependencies {
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()

@@ -7,11 +7,13 @@
 //
 
 import RxFlow
+import SwiftUI
 
 class GameSearchFlow: Flow {
     var root: Presentable { return rootViewController }
 
     private let rootViewController: UINavigationController
+    
     init(rootViewController: UINavigationController) {
         self.rootViewController = rootViewController
     }

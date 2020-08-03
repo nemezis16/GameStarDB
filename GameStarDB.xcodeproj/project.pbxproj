@@ -13,6 +13,8 @@
 		30904501247D7886009E9815 /* GameSearchFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30904500247D7886009E9815 /* GameSearchFlow.swift */; };
 		3097E66624390213009AC21D /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3097E66524390213009AC21D /* SearchService.swift */; };
 		3097E6682439024A009AC21D /* SearchServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3097E6672439024A009AC21D /* SearchServiceImpl.swift */; };
+		30B1D12624D17B710085C8BE /* GameDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B1D12524D17B710085C8BE /* GameDetailCollectionViewCell.swift */; };
+		30B1D12F24D2CD170085C8BE /* GameDetailReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B1D12E24D2CD170085C8BE /* GameDetailReactor.swift */; };
 		30C12F83244780F60060AC86 /* GameSearchViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C12F82244780F60060AC86 /* GameSearchViewControllerTest.swift */; };
 		30DB6B0D245F5101001725DA /* AppFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DB6B0C245F5101001725DA /* AppFlow.swift */; };
 		30DB6B0F245F518D001725DA /* AppStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DB6B0E245F518D001725DA /* AppStep.swift */; };
@@ -63,6 +65,8 @@
 		30904500247D7886009E9815 /* GameSearchFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchFlow.swift; sourceTree = "<group>"; };
 		3097E66524390213009AC21D /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		3097E6672439024A009AC21D /* SearchServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceImpl.swift; sourceTree = "<group>"; };
+		30B1D12524D17B710085C8BE /* GameDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		30B1D12E24D2CD170085C8BE /* GameDetailReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailReactor.swift; sourceTree = "<group>"; };
 		30C12F82244780F60060AC86 /* GameSearchViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSearchViewControllerTest.swift; sourceTree = "<group>"; };
 		30DB6B0C245F5101001725DA /* AppFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlow.swift; sourceTree = "<group>"; };
 		30DB6B0E245F518D001725DA /* AppStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStep.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 		301C4A4E244DC48D006D7C23 /* GameDetail */ = {
 			isa = PBXGroup;
 			children = (
+				30B1D12E24D2CD170085C8BE /* GameDetailReactor.swift */,
 				301C4A4F244DC49D006D7C23 /* View */,
 			);
 			path = GameDetail;
@@ -138,6 +143,7 @@
 			children = (
 				301C4A50244DC4D5006D7C23 /* GameDetailViewController.swift */,
 				301C4A52244DC4E1006D7C23 /* GameDetailViewController.storyboard */,
+				30B1D12524D17B710085C8BE /* GameDetailCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				A3A381EB23C2432D00C02ABD /* IGDB.swift in Sources */,
 				A321CFC923CB6F2D0013E851 /* UIAlertControllerExtension.swift in Sources */,
 				30904501247D7886009E9815 /* GameSearchFlow.swift in Sources */,
+				30B1D12624D17B710085C8BE /* GameDetailCollectionViewCell.swift in Sources */,
 				301C4A51244DC4D5006D7C23 /* GameDetailViewController.swift in Sources */,
 				30FA66BE24390F9A002C9595 /* Response.swift in Sources */,
 				A321CFCD23CB88E00013E851 /* UIImageViewExtension.swift in Sources */,
@@ -591,6 +598,7 @@
 				A321CFCB23CB7CD10013E851 /* GameSearchTableViewCell.swift in Sources */,
 				30DB6B0D245F5101001725DA /* AppFlow.swift in Sources */,
 				3097E66624390213009AC21D /* SearchService.swift in Sources */,
+				30B1D12F24D2CD170085C8BE /* GameDetailReactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

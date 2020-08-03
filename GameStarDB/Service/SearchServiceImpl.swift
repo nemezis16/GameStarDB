@@ -15,7 +15,7 @@ import Moya
 final class SearchServiceImpl: SearchService {
     private let jsonDecoder: JSONDecoder
     private let backgroundScheduler: SchedulerType
-    private let provider = MoyaProvider<IGDB>()
+    private let provider = MoyaProvider<IGDB>(plugins: [NetworkLoggerPlugin(configuration: .init( logOptions: .successResponseBody))])
     var page: Page = .first
 
     init(jsonDecoder: JSONDecoder, backgroundScheduler: SchedulerType) {

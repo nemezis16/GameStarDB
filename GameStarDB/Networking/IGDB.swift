@@ -41,7 +41,7 @@ extension IGDB: TargetType {
         switch self {
         case .search(let query, let limit, let offset):
             let parameters = ["search": query,
-                              "fields": "name, cover.*, rating, genres.name",
+                              "fields": "name, cover.*, rating, genres.name, summary, screenshots.*",
                                "limit": "\(limit ?? searchLimit)",
                               "offset": "\(offset ?? searchOffset)"]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)

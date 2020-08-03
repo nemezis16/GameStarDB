@@ -10,7 +10,6 @@ import typealias Reusable.NibReusable
 import UIKit
 
 class GameSearchTableViewCell: UITableViewCell, NibReusable {
-    
     @IBOutlet var gameImageView: UIImageView!
     @IBOutlet var gameTitleLabel: UILabel!
     @IBOutlet var gameGenraLabel: UILabel!
@@ -24,5 +23,4 @@ class GameSearchTableViewCell: UITableViewCell, NibReusable {
         gameGenraLabel.text = ""
         gameRatingLabel.text = ""
     }
-
 }

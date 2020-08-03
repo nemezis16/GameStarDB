@@ -27,7 +27,6 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
     }()
     private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchReactor.SectionType>(configureCell: {  _, tableView, indexPath, item in
 
-        // TODO: - Put this logic into some layer
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameSearchTableViewCell.self)
         cell.gameImageView.loadImage(fromURL: item.cover?.url.replacingOccurrences(of: "//", with: "http://").replacingOccurrences(of: "t_thumb", with: "t_screenshot_big"))
         cell.gameTitleLabel.text = item.name
