@@ -51,8 +51,7 @@ final class GameSearchReactor: Reactor, Stepper {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .selecteItem(let item):
-            print("Item selected: \(item)")
-            steps.accept(AppStep.movieIsPicked(id: item.id))
+            steps.accept(AppStep.movieIsPicked(item: item))
             return .empty()
 
         case .reachedBottom:

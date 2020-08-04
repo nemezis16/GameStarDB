@@ -6,19 +6,29 @@
 //  Copyright © 2020 Roman Osadchuk. All rights reserved.
 //
 
-import RxDataSources
+import UIKit
+import ReactorKit
+import RxSwift
 import Reusable
+import RxDataSources
 
-class GameDetailViewController: UIViewController, StoryboardBased {
+class GameDetailViewController: UIViewController, StoryboardView, StoryboardBased {
+    private typealias Action = GameDetailReactor.Action
+    var disposeBag = DisposeBag()
+
     @IBOutlet var collectionView: UICollectionView!
 
     private let dataSource = RxCollectionViewSectionedReloadDataSource <GameDetailReactor.SectionType> (configureCell: {  _, collectionView, indexPath, item in
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameDetailCollectionViewCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: GameDetailCollectionViewCell.self)
         return cell
     })
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    func bind(reactor: GameDetailReactor) {
+        
     }
 }
 //

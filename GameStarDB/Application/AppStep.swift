@@ -11,5 +11,5 @@ import RxFlow
 enum AppStep: Step {
     case onboardingIsComplete
     case gameListIsRequired
-    case movieIsPicked(id: Int)
+    case movieIsPicked(item: GameListItem)
 }

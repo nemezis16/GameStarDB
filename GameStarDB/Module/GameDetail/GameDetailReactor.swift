@@ -25,15 +25,20 @@ final class GameDetailReactor: Reactor {
     }
 
     struct State {
+        var item: GameListItem
         var isLoading = false
         var items = [URL]()
         var text = ""
         var dataSource: SectionType { SectionModel(model: "", items: [UIImage()]) }
     }
 
-    var initialState = State()
-
     let steps = PublishRelay<Step>()
+
+    let initialState: State
+
+    init(item: GameListItem) {
+        self.initialState = State(item: item)
+    }
 
     func mutate(action: Action) -> Observable<Mutation> { Observable.never() }
 

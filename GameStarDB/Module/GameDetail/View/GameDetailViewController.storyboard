@@ -40,10 +40,6 @@
                                         <size key="customSize" width="198" height="188"/>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="ec6-mr-R2r" id="s3r-Ce-IL3"/>
-                                    <outlet property="delegate" destination="ec6-mr-R2r" id="Gda-DT-4QP"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

@@ -25,8 +25,8 @@ class GameSearchFlow: Flow {
         case .gameListIsRequired:
             return navigateToGameSearchScreen()
 
-        case .movieIsPicked(id: let id):
-            return navigateToGameDetailScreen()
+        case .movieIsPicked(item: let item):
+            return navigateToGameDetailScreen(item: item)
 
         default:
             return .none
@@ -48,8 +48,11 @@ extension GameSearchFlow {
                                                  allowStepWhenNotPresented: true))
     }
 
-    private func navigateToGameDetailScreen() -> FlowContributors {
+    private func navigateToGameDetailScreen(item: GameListItem) -> FlowContributors {
+        let reactor = GameDetailReactor(item: item)
+
         let gameDetailViewController = GameDetailViewController.instantiate()
+        gameDetailViewController.reactor = reactor
 
         rootViewController.pushViewController(gameDetailViewController, animated: true)
 

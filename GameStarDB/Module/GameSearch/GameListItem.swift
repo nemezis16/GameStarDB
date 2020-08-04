@@ -12,9 +12,11 @@ import Foundation
 struct GameListItem: Codable {
     let id: Int
     let cover: Cover?
-    var genres: [Genre]?
     let name: String
+    let summary: String?
+    let genres: [Genre]?
     let rating: Double?
+    let screenshots: [Cover]?
 }
 
 // MARK: - Equatable
@@ -24,28 +26,29 @@ extension GameListItem: Equatable {
 
 // MARK: - Cover
 struct Cover: Codable {
-
     let id: Int
     let width: Int
     let game: Int
     let height: Int
-    let imageID: String?
+    let imageId: String?
     let url: String
     let animated: Bool?
     let alphaChannel: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
-        case alphaChannel = "alpha_channel"
-        case animated, game, height
-        case imageID = "image_id"
-        case url, width
+        case animated
+        case game
+        case height
+        case url
+        case width
+        case alphaChannel
+        case imageId
     }
 }
 
 // MARK: - Genre
 struct Genre: Codable {
-
     let id: Int
     let name: String
 }
@@ -53,7 +56,6 @@ struct Genre: Codable {
 // MARK: Convenience initializers
 
 extension GameListItem {
-
     init?(data: Data) {
         do {
             let me = try JSONDecoder().decode(GameListItem.self, from: data)
