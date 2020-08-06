@@ -28,7 +28,8 @@ final class GameSearchViewController: UIViewController, StoryboardView, Storyboa
     private let dataSource = RxTableViewSectionedReloadDataSource<GameSearchReactor.SectionType>(configureCell: {  _, tableView, indexPath, item in
 
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: GameSearchTableViewCell.self)
-        cell.gameImageView.loadImage(fromURL: item.cover?.url.replacingOccurrences(of: "//", with: "http://").replacingOccurrences(of: "t_thumb", with: "t_screenshot_big"))
+        cell.gameImageView.loadImage(fromURL: item.cover?.url.replacingOccurrences(of: "//", with: "http://")
+                                                             .replacingOccurrences(of: "t_thumb", with: "t_screenshot_big"))
         cell.gameTitleLabel.text = item.name
         item.rating.flatMap { cell.gameRatingLabel.text = String(format: "Rating: %.2f", $0) }
         cell.gameGenraLabel.text = item.genres?.compactMap { $0.name }.joined(separator: ", ")

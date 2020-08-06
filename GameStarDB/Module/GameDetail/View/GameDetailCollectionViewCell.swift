@@ -11,10 +11,12 @@ import UIKit
 
 class GameDetailCollectionViewCell: UICollectionViewCell, NibReusable {
 
+    @IBOutlet var gameDetailImageView: UIImageView!
+
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        
+        gameDetailImageView.image = UIImage()
     }
 
 }

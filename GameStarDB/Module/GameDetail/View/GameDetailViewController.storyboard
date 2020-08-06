@@ -17,11 +17,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uRV-jz-axC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="QpG-PH-xSg"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="397.5"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="1" id="Bqa-5a-oT9">
                                     <size key="itemSize" width="198" height="188"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -30,22 +27,40 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameDetailCollectionViewCell" id="A3G-bJ-ufh" customClass="GameDetailCollectionViewCell" customModule="GameStarDB" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="198" height="188"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="198" height="188"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9mQ-7d-82F">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="188"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r5U-fo-yLn">
+                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="188"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="r5U-fo-yLn" firstAttribute="top" secondItem="9mQ-7d-82F" secondAttribute="top" id="B4q-eh-Z2M"/>
+                                                <constraint firstAttribute="trailing" secondItem="r5U-fo-yLn" secondAttribute="trailing" id="ECv-b7-dzM"/>
+                                                <constraint firstItem="r5U-fo-yLn" firstAttribute="leading" secondItem="9mQ-7d-82F" secondAttribute="leading" id="FZY-WF-BgS"/>
+                                                <constraint firstAttribute="bottom" secondItem="r5U-fo-yLn" secondAttribute="bottom" id="SlW-V0-KkV"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="198" height="188"/>
+                                        <connections>
+                                            <outlet property="gameDetailImageView" destination="r5U-fo-yLn" id="bFG-TF-mcV"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="ec6-mr-R2r" id="9Ie-hl-gJu"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="uRV-jz-axC" firstAttribute="leading" secondItem="3Hp-M6-vA3" secondAttribute="leading" id="KvH-LI-9Jp"/>
-                            <constraint firstItem="uRV-jz-axC" firstAttribute="top" secondItem="uWo-5v-aAC" secondAttribute="top" id="cUj-O3-AWC"/>
+                            <constraint firstItem="uRV-jz-axC" firstAttribute="height" secondItem="uWo-5v-aAC" secondAttribute="height" multiplier="0.7" id="ZI0-3x-Zfk"/>
+                            <constraint firstItem="uRV-jz-axC" firstAttribute="top" secondItem="3Hp-M6-vA3" secondAttribute="top" id="cUj-O3-AWC"/>
                             <constraint firstItem="3Hp-M6-vA3" firstAttribute="trailing" secondItem="uRV-jz-axC" secondAttribute="trailing" id="vbu-aV-OUR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Hp-M6-vA3"/>

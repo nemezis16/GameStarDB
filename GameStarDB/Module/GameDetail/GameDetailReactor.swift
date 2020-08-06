@@ -15,7 +15,7 @@ import struct Differentiator.SectionModel
 
 final class GameDetailReactor: Reactor {
 
-    typealias SectionType = SectionModel<String, UIImage>
+    typealias SectionType = SectionModel<String, String>
 
     enum Action: Equatable {}
 
@@ -29,7 +29,11 @@ final class GameDetailReactor: Reactor {
         var isLoading = false
         var items = [URL]()
         var text = ""
-        var dataSource: SectionType { SectionModel(model: "", items: [UIImage()]) }
+        var dataSource: [SectionType] {
+            var screenshotsUrls = item.screenshots?.map({ $0.url }) ?? [String]()
+            item.cover.flatMap { screenshotsUrls.append($0.url) } // Append cover to screenshots
+            return [SectionModel(model: "", items: screenshotsUrls)]
+        }
     }
 
     let steps = PublishRelay<Step>()
