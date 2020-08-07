@@ -17,6 +17,7 @@ class GameDetailViewController: UIViewController, StoryboardView, StoryboardBase
     var disposeBag = DisposeBag()
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var textView: UITextView!
 
     private let dataSource = RxCollectionViewSectionedReloadDataSource <GameDetailReactor.SectionType> (configureCell: {  _, collectionView, indexPath, item in
         let cell = collectionView.dequeueReusableCell(for: indexPath, cellType: GameDetailCollectionViewCell.self)
@@ -34,7 +35,8 @@ class GameDetailViewController: UIViewController, StoryboardView, StoryboardBase
     func bind(reactor: GameDetailReactor) {
         let state = reactor.state.asDriver(onErrorJustReturn: reactor.initialState)
         state.map { $0.dataSource }.distinctUntilChanged().drive(collectionView.rx.items(dataSource: self.dataSource)).disposed(by: disposeBag)
-
+        state.map { $0.text }.distinctUntilChanged().drive(textView.rx.text).disposed(by: disposeBag)
+        state.map { $0.item.name }.distinctUntilChanged().drive(rx.title).disposed(by: disposeBag)
     }
 }
 

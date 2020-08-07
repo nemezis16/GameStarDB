@@ -28,7 +28,7 @@ final class GameDetailReactor: Reactor {
         var item: GameListItem
         var isLoading = false
         var items = [URL]()
-        var text = ""
+        var text: String { item.summary ?? "" }
         var dataSource: [SectionType] {
             var screenshotsUrls = item.screenshots?.map({ $0.url }) ?? [String]()
             item.cover.flatMap { screenshotsUrls.append($0.url) } // Append cover to screenshots
