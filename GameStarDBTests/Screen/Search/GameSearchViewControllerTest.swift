@@ -22,7 +22,7 @@ final class GameSearchViewControllerTest: QuickSpec {
                 autoreleasepool {
                     let sut = GameSearchViewController.instantiate()
                     let searchService = SearchServiceImpl(jsonDecoder: JSONDecoder(), backgroundScheduler: MainScheduler.instance)
-                    sut.reactor = GameSearchViewModel(searchService: searchService)
+                    sut.reactor = GameSearchReactor(searchService: searchService)
 
                     _ = sut.view
                 }

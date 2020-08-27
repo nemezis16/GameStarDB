@@ -9,7 +9,6 @@
 import class Foundation.JSONDecoder
 import class RxSwift.SerialDispatchQueueScheduler
 
-/// There is no place for production-like DI in this example, sorry
 enum Dependencies {
     static let jsonDecoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -18,5 +17,5 @@ enum Dependencies {
     }()
     static let backgroundScheduler = SerialDispatchQueueScheduler(qos: .userInitiated)
     static let searchService = SearchServiceImpl(jsonDecoder: jsonDecoder, backgroundScheduler: Dependencies.backgroundScheduler)
-    static let searchViewModel2 = GameSearchViewModel(searchService: searchService)
+    static let gameSearchReactor = GameSearchReactor(searchService: searchService)
 }
